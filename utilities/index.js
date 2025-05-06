@@ -1,3 +1,5 @@
+const logger = require("./logger");
+
 const Util = {};
 
 Util.logRoutes = (req, res, next) => {
@@ -16,13 +18,8 @@ Util.logRoutes = (req, res, next) => {
 
   if (!shouldIgnore) {
     // print routes in gray and blue
-    console.log(
-      "\x1b[90m",
-      req.method,
-      "\x1b[0m",
-      "\x1b[34m",
-      req.originalUrl,
-      "\x1b[0m"
+    logger.info(
+      `\x1b[90m${req.method}\x1b[0m \x1b[34m${req.originalUrl}\x1b[0m`
     );
   }
 

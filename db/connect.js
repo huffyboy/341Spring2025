@@ -1,12 +1,13 @@
 const dotenv = require("dotenv");
 dotenv.config();
 const MongoClient = require("mongodb").MongoClient;
+const logger = require("../utilities/logger");
 
 let _db;
 
 const initDb = async (callback) => {
   if (_db) {
-    console.log("Db is already initialized!");
+    logger.info("Db is already initialized!");
     return callback(null, _db);
   }
 

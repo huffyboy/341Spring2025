@@ -1,6 +1,7 @@
 const express = require("express");
 const mongodb = require("./db/connect");
 const utilities = require("./utilities");
+const logger = require("./utilities/logger");
 require("dotenv").config();
 const app = express();
 
@@ -16,8 +17,8 @@ const contactsRoute = require("./routes/contactsRoute");
 // Home route
 app.get("/", homeRoute);
 app.use("/contacts", contactsRoute);
-app.use(async (req, res, next) => {
-  next({ status: 404, message: "Sorry, we appear to have lost that page." });
+app.use((req, res) => {
+  res.status(404).send("Sorry, we appear to have lost that page.");
 });
 
 /* ***********************
@@ -30,7 +31,7 @@ const host = process.env.HOST;
 // Setup DB
 mongodb.initDb((err) => {
   if (err) {
-    console.log(err);
+    logger.error(err);
   }
 });
 
@@ -38,5 +39,5 @@ mongodb.initDb((err) => {
  * Log statement to confirm server operation
  *************************/
 app.listen(port, () => {
-  console.log(`App listening at http://${host}:${port}`);
+  logger.info(`App listening at http://${host}:${port}`);
 });
