@@ -1,0 +1,36 @@
+@host = localhost
+@port = 3000
+
+
+// Local Testing
+### Test Home Route
+GET http://{{host}}:{{port}}/ HTTP/1.1
+
+### Test 404
+GET http://{{host}}:{{port}}/invalid-url HTTP/1.1
+
+### Test All Contacts
+GET http://{{host}}:{{port}}/contacts HTTP/1.1
+
+### Test Single Contact by ID
+GET http://{{host}}:{{port}}/contacts/68196c2da24b5bb6bbd11834 HTTP/1.1
+
+### Test 404 for Invalid ObjectId
+GET http://{{host}}:{{port}}/contacts/invalid-id HTTP/1.1
+
+
+// Production Testing
+###
+GET https://three41spring2025.onrender.com/
+
+###
+GET https://three41spring2025.onrender.com/contacts
+
+###
+GET https://three41spring2025.onrender.com/contacts/68196c2da24b5bb6bbd11834
+
+###
+GET https://three41spring2025.onrender.com/contacts/68196c2da24b5bb6bbd11835
+
+###
+GET https://three41spring2025.onrender.com/contacts/68196c2da24b5bb6bbd11836
