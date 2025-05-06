@@ -18,19 +18,72 @@ GET http://{{host}}:{{port}}/contacts/68196c2da24b5bb6bbd11834 HTTP/1.1
 ### Test 404 for Invalid ObjectId
 GET http://{{host}}:{{port}}/contacts/invalid-id HTTP/1.1
 
+### Test Create Contact (POST)
+POST http://{{host}}:{{port}}/contacts HTTP/1.1
+Content-Type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john.doe@example.com",
+  "favoriteColor": "green",
+  "birthday": "1990-05-12"
+}
+
+### Test Update Contact (PUT)
+PUT http://{{host}}:{{port}}/contacts/6819d36eb591cf8a3d191d27 HTTP/1.1
+Content-Type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john.doe@newdomain.com",
+  "favoriteColor": "purple",
+  "birthday": "1999-06-15"
+}
+
+### Test Delete Contact (DELETE)
+DELETE http://{{host}}:{{port}}/contacts/6819d4f9b7491545c546d29b HTTP/1.1
 
 // Production Testing
-###
+### Test Home Route (Production)
 GET https://three41spring2025.onrender.com/
 
-###
+### Get All Contacts (Production)
 GET https://three41spring2025.onrender.com/contacts
 
-###
+### Get Contact by Valid ID (Production)
 GET https://three41spring2025.onrender.com/contacts/68196c2da24b5bb6bbd11834
 
-###
+### Get Contact by Another Valid ID (Production)
 GET https://three41spring2025.onrender.com/contacts/68196c2da24b5bb6bbd11835
 
-###
+### Get Contact by Yet Another Valid ID (Production)
 GET https://three41spring2025.onrender.com/contacts/68196c2da24b5bb6bbd11836
+
+### Create New Contact (POST - Production)
+POST https://three41spring2025.onrender.com/contacts
+Content-Type: application/json
+
+{
+  "firstName": "Jane",
+  "lastName": "Smith",
+  "email": "jane.smith@example.com",
+  "favoriteColor": "blue",
+  "birthday": "1985-11-23"
+}
+
+### Update Existing Contact (PUT - Production)
+PUT https://three41spring2025.onrender.com/contacts/6819d36eb591cf8a3d191d27
+Content-Type: application/json
+
+{
+  "firstName": "Jane",
+  "lastName": "Smith",
+  "email": "jane.smith@updated.com",
+  "favoriteColor": "red",
+  "birthday": "1985-11-23"
+}
+
+### Delete Contact (DELETE - Production)
+DELETE https://three41spring2025.onrender.com/contacts/6819d4f9b7491545c546d29b

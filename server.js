@@ -8,7 +8,8 @@ const app = express();
 /* ***********************
  * Middleware
  * ************************/
-app.use(utilities.logRoutes);
+app.use(express.json()); // JSON parsing
+app.use(utilities.logRoutes); // Basic traffic logging
 
 // Import routes
 const homeRoute = require("./routes/homeRoute");
