@@ -13,11 +13,13 @@ app.use(utilities.logRoutes); // Basic traffic logging
 
 // Import routes
 const homeRoute = require("./routes/homeRoute");
-const contactsRoute = require("./routes/contactsRoute");
+const contactRoutes = require("./routes/contactsRoute");
+const swaggerRoutes = require("./routes/swagger");
 
 // Home route
 app.get("/", homeRoute);
-app.use("/contacts", contactsRoute);
+app.use("/contacts", contactRoutes);
+app.use("/", swaggerRoutes);
 app.use((req, res) => {
   res.status(404).send("Sorry, we appear to have lost that page.");
 });
@@ -35,6 +37,9 @@ mongodb.initDb((err) => {
     logger.error(err);
   }
 });
+
+// Final error handler
+app.use(utilities.errorHandler);
 
 /* ***********************
  * Log statement to confirm server operation
