@@ -2,10 +2,7 @@ const swaggerJsdoc = require("swagger-jsdoc");
 const path = require("path");
 require("dotenv").config();
 
-const host = process.env.HOST || "localhost";
-const port = process.env.PORT || 3000;
-const serverUrl = `http://${host}:${port}`;
-
+const serverUrl = process.env.SERVER_URL;
 const options = {
   definition: {
     openapi: "3.0.0",

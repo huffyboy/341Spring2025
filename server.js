@@ -6,8 +6,8 @@ const cors = require("cors");
 require("dotenv").config();
 
 const allowedOrigins = [
+  process.env.SERVER_URL,
   "https://cse341-contacts-frontend.netlify.app",
-  "https://three41spring2025.onrender.com",
   "http://localhost:3000",
 ];
 const port = process.env.PORT;
