@@ -2,12 +2,32 @@ const express = require("express");
 const mongodb = require("./db/connect");
 const utilities = require("./utilities");
 const logger = require("./utilities/logger");
+const cors = require("cors");
 require("dotenv").config();
+
+const allowedOrigins = [
+  "https://cse341-contacts-frontend.netlify.app",
+  "http://localhost:3000",
+];
+const port = process.env.PORT;
+const host = process.env.HOST;
 const app = express();
 
 /* ***********************
  * Middleware
  * ************************/
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    optionsSuccessStatus: 200,
+  })
+);
 app.use(express.json()); // JSON parsing
 app.use(utilities.logRoutes); // Basic traffic logging
 
@@ -23,13 +43,6 @@ app.use("/", swaggerRoutes);
 app.use((req, res) => {
   res.status(404).send("Sorry, we appear to have lost that page.");
 });
-
-/* ***********************
- * Server Information
- * Values from .env (environment) file
- *************************/
-const port = process.env.PORT;
-const host = process.env.HOST;
 
 // Setup DB
 mongodb.initDb((err) => {
